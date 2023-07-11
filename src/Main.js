@@ -1,4 +1,34 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const PizzaFrame = styled.div`
+	border: solid 1px gray;
+	padding: 10px;
+	margin: 15px 10px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px grey;
+	font-family: Arial;
+`;
+
+const Input = styled.input`
+	border: solid 1px black;
+	padding: 5px;
+	border-radius: 3px;
+`;
+
+const Title = styled(Input)`
+	text-transform: uppercase;
+`;
+
+const Save = styled.button`
+	width: 100px;
+	margin: 10px;
+	background: green;
+	color: white;
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 5px;
+`;
 
 let pizzas = [
 	{
@@ -24,14 +54,14 @@ const Pizza = ({ pizza }) => {
 
 	function onSave() {
 		setDirty(false);
-		// make rest call
+		// make REST call
 	}
 
 	return (
 		<React.Fragment>
-			<div>
+			<PizzaFrame>
 				<h3>
-					<input
+					<Title
 						onChange={(evt) =>
 							update(evt.target.value, "name", data)
 						}
@@ -39,7 +69,7 @@ const Pizza = ({ pizza }) => {
 					/>
 				</h3>
 				<div>
-					<input
+					<Input
 						onChange={(evt) =>
 							update(evt.target.value, "description", data)
 						}
@@ -48,16 +78,16 @@ const Pizza = ({ pizza }) => {
 				</div>
 				{dirty ? (
 					<div>
-						<button onClick={onSave}>Save</button>
+						<Save onClick={onSave}>Save</Save>
 					</div>
 				) : null}
-			</div>
+			</PizzaFrame>
 		</React.Fragment>
 	);
 };
 
 const Main = () => {
-	const data = pizzas.map((pizza) => <Pizza pizza={pizza} />);
+	const data = pizzas.map((pizzas) => <Pizza pizza={pizzas} />);
 
 	return <React.Fragment>{data}</React.Fragment>;
 };
